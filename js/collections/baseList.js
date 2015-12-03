@@ -3,7 +3,7 @@ app.collections = app.collections || {};
 (function () {
     'use strict';
 
-    //It needs to define  model attribute in model instance
+    //It needs to define a model attribute into model instance
 
     app.collections.BaseList = Backbone.Collection.extend({
 
