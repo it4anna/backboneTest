@@ -3,7 +3,7 @@ app.views = app.views || {};
 (function () {
     'use strict';
 
-    app.views.roomListView = app.views.baseListView.extend({
+    app.views.RoomListView = app.views.baseListView.extend({
         template: _.template('<div>' +
             '<span id="header-label"></span>' +
             '<input type="checkbox" class="pull-right checkbox all">' +
@@ -16,10 +16,12 @@ app.views = app.views || {};
             'change .floor': 'onFloorChanged'
         },
 
-        initialize: function() {
-            this.collection = new app.collections.FloorList();
+        initialize: function(data) {
+
+            this.collection = data.collection;
             Backbone.Mediator.sub('floor:clicked', this.onFloorClicked, this);
-            this.collection.fetch().done(
+
+            /*this.collection.fetch().done(
                 function (responce) {
 
                     var selectedOfficeId = app.helper.localStorageRetrieve('selectedOfficeId')[0],
@@ -30,9 +32,9 @@ app.views = app.views || {};
                     }
                     this.render();
                 }.bind(this)
-            );
-
-            Backbone.Mediator.sub('office:selected', this.onOfficeSelected, this);
+            );*/
+            //moved to listController
+            //Backbone.Mediator.sub('office:selected', this.onOfficeSelected, this);
         },
 
         render: function () {

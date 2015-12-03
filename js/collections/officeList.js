@@ -5,7 +5,7 @@ app.collections = app.collections || {};
 
     app.collections.OfficeList = Backbone.Collection.extend({
 
-        model: app.models.office,
+        model: app.models.Office,
 
         // Save all of the office items under the 'office-backbone-Storage' namespace.
         localStorage: new Backbone.LocalStorage('office-backbone-storage'),

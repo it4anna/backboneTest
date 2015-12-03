@@ -3,7 +3,7 @@ app.views = app.views || {};
 (function () {
     'use strict';
 
-    app.views.officeListView = Backbone.View.extend({
+    app.views.OfficeListView = Backbone.View.extend({
         template: _.template('<div>' +
             '<span id="header-label"></span>' +
             '<input type="checkbox" class="pull-right checkbox">' +

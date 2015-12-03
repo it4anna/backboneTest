@@ -7,7 +7,6 @@ app.models = app.models || {};
     // ----------
 
     // A basic **Room** model has `name`, `floorId`, 'personsCapacity', 'sequence' attributes.
-//TODO: Room not room
-    app.models.room = app.models.baseModel.extend({
+    app.models.Room = app.models.baseModel.extend({
     });
 })();

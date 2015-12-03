@@ -8,7 +8,7 @@ app.models = app.models || {};
 
     // A basic **Office** model has `name`, `_embeded` attributes.
 
-    app.models.office = app.models.baseModel.extend({
+    app.models.Office = app.models.baseModel.extend({
         defaults: {
             id: 'N/A',
             name: '',

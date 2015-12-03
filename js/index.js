@@ -21,14 +21,14 @@ $(document).ready(function () {
     app.setToBackboneLocalStorage(app.collections.RoomList ,app.jsons.roomList);
 
     //Create Collections
-    app.collections.officeListInst = new app.collections.OfficeList();
-    app.collections.floorListInst = new app.collections.FloorList();
-    app.collections.roomListInst = new app.collections.RoomList();
+   // app.collections.officeListInst = new app.collections.OfficeList();
+  //  app.collections.floorListInst = new app.collections.FloorList();
+  //  app.collections.roomListInst = new app.collections.RoomList();
 
     //Create Views
-    officeListView = new app.views.officeListView({el: '#office-container'});
-    floorListView = new app.views.floorListView({el: '#floor-container'});
+    officeListView = new app.views.OfficeListView({el: '#office-container'});
+    floorListView = new app.views.FloorListView({el: '#floor-container'});
    // roomListView = new app.views.roomListView({el: '#room-container'});
 
-    var roomsController = new app.controllers.RoomsController({name:'roomsController'});
+    var roomsController = new app.controllers.RoomsController({officeIds: ['','']});
 });

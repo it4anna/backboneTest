@@ -8,7 +8,7 @@ app.models = app.models || {};
 
     // A basic **Floor** model has `name`, `floorId`, 'officeId' attributes.
 
-    app.models.floor = app.models.baseModel.extend({
+    app.models.Floor = app.models.baseModel.extend({
         idAttribute: "floorId"
     });
 })();

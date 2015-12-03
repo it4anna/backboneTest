@@ -5,7 +5,7 @@ app.collections = app.collections || {};
 
     app.collections.RoomList = app.collections.BaseList.extend({
 
-        model: app.models.room,
+        model: app.models.Room,
 
         // Save all of the office items under the 'floor-backbone-Storage' namespace.
         localStorage: new Backbone.LocalStorage('room-backbone-storage')
