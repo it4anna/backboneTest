@@ -4,24 +4,27 @@ app.controllers = app.controllers || {};
     'use strict';
 
     app.controllers.RoomsController = app.controllers.base.extend({
-        initialize: function (data) {
-            this.sortedCollView = [];
-            //create collectionViews for all existing rooms
-            data.officeIds.each(function (roomIds) {
-                var sortedCollection = new app.collections.RoomList();
-                sortedCollection.fetch().done(this.setSorted({sortBy:roomIds}));
-                this.sortedCollView[roomIds] = new app.collections.RoomList({colelction: sortedCollection});
-            }, this);
+        initialize: function () {
+            this.collection = new app.collections.RoomList();
+            this.collectionView = new app.views.RoomListView({el: '#room-container'});
 
-            Backbone.Mediator.sub('office:selected', this.onRoomSelected, this);
+            this.collection.fetch().done(function () {
+                //add storaged models
+/*                _.each(data.floorIds, function (floorId){
+                    this.sortedCollView[floorId] =
+                        new app.views.RoomListView();
+                    this.sortedCollView[floorId].collection.setFilterColl('floorId', floorId, collection);
+                    $('#room-container .container').append(this.sortedCollView[floorId].render().$el);
+                }, this);*/
+                this.collectionView.render();
+            }.bind(this));
+
+            Backbone.Mediator.sub('floor:selected', this.updateCollection, this);
         },
 
-        onRoomSelected: function (roomIds) {
-            this.sortedCollView[roomIds].show();
-        },
-
-        render: function () {
-            console.log('RoomsController render');
+        updateCollection: function (floorId) {
+            this.collectionView.collection.setFilterColl('floorId', floorId, this.collection);
+            console.log('updateCollection with args: ', agruments);
         }
     });
 })();

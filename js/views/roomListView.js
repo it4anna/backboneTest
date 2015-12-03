@@ -4,40 +4,16 @@ app.views = app.views || {};
     'use strict';
 
     app.views.RoomListView = app.views.baseListView.extend({
-        template: _.template('<div>' +
-            '<span id="header-label"></span>' +
-            '<input type="checkbox" class="pull-right checkbox all">' +
-            '<label class="floor-label">Check all</label> ' +
-            '<div id="content"></div>' +
-            '</div>'),
+        name: 'RoomListView',
 
-        events: {
-            'click .all': 'onAllCheckboxClicked',
-            'change .floor': 'onFloorChanged'
-        },
+        initialize: function () {
+            this.collection =  new app.collections.RoomList ();
+            this.View = app.views.RoomView;
+            this.headerName = 'Room';
 
-        initialize: function(data) {
-
-            this.collection = data.collection;
-            Backbone.Mediator.sub('floor:clicked', this.onFloorClicked, this);
-
-            /*this.collection.fetch().done(
-                function (responce) {
-
-                    var selectedOfficeId = app.helper.localStorageRetrieve('selectedOfficeId')[0],
-                        selectedFloors = app.helper.localStorageRetrieve('selectedFloorIdsList');
-
-                    if(selectedFloors && selectedFloors.length) {
-                        this.collection.setSelected(selectedFloors, true);
-                    }
-                    this.render();
-                }.bind(this)
-            );*/
-            //moved to listController
-            //Backbone.Mediator.sub('office:selected', this.onOfficeSelected, this);
-        },
-
-        render: function () {
+            this.listenTo(this.collection, 'change', this.render);
+        }
+       /* render: function () {
             this.$el.html('');
             this.$el.append(this.template());
             this.renderHeaderLabel();
@@ -75,10 +51,10 @@ app.views = app.views || {};
                     selectedFloorsNames = 'All';
                     break;
                 default:
-                    /*                    _.each(selectedFloor, function (id) {
+                    /!*                    _.each(selectedFloor, function (id) {
                      // selectedFloorsNames.push(
                      this.collection.setModelsToShow.where({model.id = id}return model.get('labelName');});
-                     });*/
+                     });*!/
                     break;
             }
             return selectedFloorsNames;
@@ -121,6 +97,6 @@ app.views = app.views || {};
             //tmp
             app.helper.localStorageSave('selectedFloorIdsList', [changedFool.id]);
             this.renderHeaderLabel();
-        }
+        }*/
     });
 })();

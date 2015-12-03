@@ -20,6 +20,8 @@ $(document).ready(function () {
     app.setToBackboneLocalStorage(app.collections.FloorList ,app.jsons.floorList);
     app.setToBackboneLocalStorage(app.collections.RoomList ,app.jsons.roomList);
 
+
+
     //Create Collections
    // app.collections.officeListInst = new app.collections.OfficeList();
   //  app.collections.floorListInst = new app.collections.FloorList();
@@ -30,5 +32,10 @@ $(document).ready(function () {
     floorListView = new app.views.FloorListView({el: '#floor-container'});
    // roomListView = new app.views.roomListView({el: '#room-container'});
 
-    var roomsController = new app.controllers.RoomsController({officeIds: ['','']});
+    var floorIds = [];
+    _.each(app.jsons.floorList, function (floor) { floorIds.push(floor.floorId)}, this);
+
+    var floorsController = new app.controllers.FloorsController(),
+        roomsController = new app.controllers.RoomsController();
+
 });

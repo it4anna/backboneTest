@@ -7,17 +7,26 @@ app.collections = app.collections || {};
 
     app.collections.BaseList = Backbone.Collection.extend({
 
-        comparator : function (a, b) {
+        initialize: function () {
+        },
+
+        comparator : 'name,'/*function (a, b) {
             var na = a.get('name'),
                 nb = b.get('name');
 
             if (na === nb) return 0;
             return (na < nb) ? -1:1;
-        },
+        }*/,
 
-        setSorted: function (sortAttr, ids) {
-            var sortedIds = this.where({sortAttr: id});
-            this.models = this.pluck('sortedIds');
+        setFilterColl: function (sortAttr, id, collection) {
+            var sort = {},
+                sortedModels;
+
+            sort[sortAttr] = id;
+                sortedModels = collection.where(sort);
+            this.models = sortedModels;
+            this.length = sortedModels.length;
+            this.trigger('change');
         },
 
         setSelected: function (selectedIds, value) {
