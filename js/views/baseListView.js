@@ -53,11 +53,11 @@ app.views = app.views || {};
                     break;
                 default:
                     selectedFloorsNames  =  'Selected IDs';
-                    break;
-                    /*                    _.each(selectedFloor, function (id) {
+                    /*  _.each(selectedFloor, function (id) {
                      // selectedFloorsNames.push(
-                     this.collection.setModelsToShow.where({model.id = id}return model.get('labelName');});
+                     //   this.collection.where({model.id = id}return model.get('labelName');});
                      });*/
+                    break;
             }
             return selectedFloorsNames;
         }

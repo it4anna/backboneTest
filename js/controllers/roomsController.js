@@ -8,15 +8,12 @@ app.controllers = app.controllers || {};
             this.collection = new app.collections.RoomList();
             this.collectionView = new app.views.RoomListView({el: '#room-container'});
 
+            //add storaged models
+            this.storedRoomIds = app.helper.localStorageGet('selectedRoomIdsList');
+
             this.collection.fetch().done(function () {
-                //add storaged models
-/*                _.each(data.floorIds, function (floorId){
-                    this.sortedCollView[floorId] =
-                        new app.views.RoomListView();
-                    this.sortedCollView[floorId].collection.setFilterColl('floorId', floorId, collection);
-                    $('#room-container .container').append(this.sortedCollView[floorId].render().$el);
-                }, this);*/
                 this.collectionView.render();
+                this.collectionView.collection.setFilterColl('officeId', this.storedRoomIds, this.collection);
             }.bind(this));
 
             Backbone.Mediator.sub('floor:clicked', this.onFloorClicked, this);
