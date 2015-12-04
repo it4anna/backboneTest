@@ -17,15 +17,15 @@ app.views = app.views || {};
 
         initialize: function() {
             this.collection =  new app.collections.OfficeList();
-            this.currentOfficeId = app.helper.localStorageRetrieve('selectedOfficeId');
+            this.currentOfficeId = app.helper.localStorageGet('selectedOfficeId');
             Backbone.Mediator.sub('office:selected', this.renderHeaderLabel, this);
 
             this.collection.fetch().done(function(responce) {
                 if(this.currentOfficeId.length) {
-                    this.collection.setSelected(this.currentOfficeId);
+                    this.collection.setSelected(this.currentOfficeId[0]);
                 }
                 this.render();
-                this.renderHeaderLabel(this.currentOfficeId);
+                this.renderHeaderLabel(this.currentOfficeId[0]);
             }.bind(this));
         },
 

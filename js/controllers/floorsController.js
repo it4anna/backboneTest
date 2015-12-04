@@ -46,8 +46,7 @@ app.controllers = app.controllers || {};
         },
 
         updateCollection: function (officeId) {
-            this.collectionView.collection.setFilterColl('officeId', officeId, this.collection);
-            console.log('collection updated: ', this.collectionView.collection.models);
+            this.collectionView.collection.setFilterColl('officeId', [officeId], this.collection);
         }
     });
 })();

@@ -19,7 +19,7 @@ app.views = app.views || {};
 
         render: function () {
             var data = {
-                name: this.model.get('labelName') ? this.model.get('labelName') :  this.model.get('name'),
+                name: this.model.get('labelName') ? (this.model.get('labelName') + ' Floor') :  this.model.get('name'),
                 dataStyle: this.model.get('dataStyle'),
                 additionalData: this.model.get('roomNumber') || this.model.get('personsCapacity'),
                 isChecked: this.model.get('isSelected') ? 'checked' : ''

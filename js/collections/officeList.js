@@ -19,7 +19,7 @@ app.collections = app.collections || {};
         },
 
         setSelected: function (selectedOfficeId) {
-            this.get(selectedOfficeId).set('isSelected', 'checked');
+            this.get([selectedOfficeId]).set('isSelected', 'checked');
         }
     });
 })();

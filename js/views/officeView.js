@@ -30,10 +30,12 @@ app.views = app.views || {};
         },
 
         onSelected: function () {
-            app.helper.localStorageSave("selectedOfficeId", [this.model.id]);
+            app.helper.localStorageSet("selectedOfficeId", [this.model.id]);
             this.model.set('isSelected', 'checked');
 
             Backbone.Mediator.pub('office:selected', this.model.id);
+            app.helper.localStorageSet('selectedFloorIdsList', []);
+            app.helper.localStorageSet('selectedRoomIdsList', []);
         }
     });
 })();

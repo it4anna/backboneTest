@@ -8,7 +8,17 @@ app.views = app.views || {};
       var isChecked = this.$('input.oneItem').is(':checked');
       this.model.set('isSelected', isChecked);
 
-      Backbone.Mediator.pub('floor:clicked', {floorId: this.model.id, isChecked: isChecked});
+      var currentSelectedIds = app.helper.localStorageGet('selectedFloorIdsList') || [];
+
+      if(isChecked) {
+        currentSelectedIds.push(this.model.id);
+      } else {
+        currentSelectedIds = _.without(currentSelectedIds, this.model.id)
+      }
+
+      app.helper.localStorageSet('selectedFloorIdsList', currentSelectedIds);
+
+      Backbone.Mediator.pub('floor:clicked', currentSelectedIds);
     }
   });
 })();
