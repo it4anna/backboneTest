@@ -13,7 +13,7 @@ app.views = app.views || {};
 
         events: {
             'click .filter': 'onFilterChanged',
-            'change .one': 'onOneChanged'
+            //'change .one': 'onOneChanged'
         },
 
         render: function () {

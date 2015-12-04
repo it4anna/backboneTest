@@ -23,12 +23,7 @@
 
 img {
     width: 20px;
-}
-
-.name-label{
-    font-size: small;
-    float: right;
-    width: 45px;
+    margin-left: 5px;
 }
 
 .checkbox {
