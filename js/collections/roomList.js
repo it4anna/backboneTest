@@ -8,10 +8,6 @@ app.collections = app.collections || {};
 
         model: app.models.Room,
 
-        initialize: function () {
-
-        },
-
         // Save all of the office items under the 'floor-backbone-Storage' namespace.
         localStorage: new Backbone.LocalStorage('room-backbone-storage')
     });

@@ -4,7 +4,7 @@ app.views = app.views || {};
     'use strict';
 
     app.views.FloorListView = app.views.baseListView.extend({
-        name: 'FloorListView',
+        name: 'floor',
 
         initialize: function () {
             this.collection =  new app.collections.FloorList ();
@@ -12,6 +12,15 @@ app.views = app.views || {};
             this.headerName = 'Floor';
 
             this.listenTo(this.collection, 'change', this.render.bind(this));
+        },
+
+        onFilterChanged : function () {
+            if (this.$('.filter').is(':checked')){
+                this.collection.sort('roomNumber');
+            } else {
+                this.collection.sort('labelName');
+            }
+            this.renderContent();
         }
     });
 })();

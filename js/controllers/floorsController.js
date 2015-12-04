@@ -7,6 +7,7 @@ app.controllers = app.controllers || {};
         initialize: function () {
             this.collection = new app.collections.FloorList();
             this.collectionView = new app.views.FloorListView({el: '#floor-container'});
+            this.roomCollection = new app.collections.RoomList();
 
             this.collection.fetch().done(function () {
                 //add storaged models
@@ -16,7 +17,29 @@ app.controllers = app.controllers || {};
                  this.sortedCollView[floorId].collection.setFilterColl('floorId', floorId, collection);
                  $('#room-container .container').append(this.sortedCollView[floorId].render().$el);
                  }, this);*/
-                this.collectionView.render();
+
+                this.roomCollection.fetch().done(function(){
+                    var models = [],
+                        i = 0;
+
+                    _.each(this.collection.models, function(floor){
+                        //set attribute to adding group style
+                        models = [];
+                        _.each(this.roomCollection.models,
+                            function(model){
+                                if (model.get('floorId') === floor.get('floorId')){
+                                    models.push(model);
+                                    model.set('dataStyle', i);
+                                }
+                            }, this);
+
+                        floor.set('dataStyle', i);
+                        floor.set('roomNumber', models.length);
+                        i++;
+                    }, this);
+                    this.collectionView.render();
+                }.bind(this));
+
             }.bind(this));
 
             Backbone.Mediator.sub('office:selected', this.updateCollection, this);

@@ -10,13 +10,7 @@ app.collections = app.collections || {};
         initialize: function () {
         },
 
-        comparator : 'name,'/*function (a, b) {
-            var na = a.get('name'),
-                nb = b.get('name');
-
-            if (na === nb) return 0;
-            return (na < nb) ? -1:1;
-        }*/,
+        comparator : 'name',
 
         setFilterColl: function (sortAttr, id, collection) {
             var sort = {},

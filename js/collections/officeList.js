@@ -10,23 +10,11 @@ app.collections = app.collections || {};
         // Save all of the office items under the 'office-backbone-Storage' namespace.
         localStorage: new Backbone.LocalStorage('office-backbone-storage'),
 
-        comparator : function (a, b) {
-            var ra = a.get('name'),
-                rb = b.get('name');
-
-            if (ra === rb) return 0;
-            return (ra < rb) ? -1:1;
-        },
+        comparator : 'name',
 
         sortByCountry: function() {
             this.models = _.sortBy(this.models, function(model) {
                 return model.get('_embedded').location.country;
-            });
-        },
-
-        sortByName: function() {
-            this.models = _.sortBy(this.models, function(model) {
-                return model.get('name');
             });
         },
 

@@ -8,6 +8,8 @@ app.models = app.models || {};
 
     // A basic **Room** model has `name`, `floorId`, 'personsCapacity', 'sequence' attributes.
     app.models.Room = app.models.baseModel.extend({
-        name: 'RoomModel'
+        defaults: {
+            roomsNumber: 0
+        }
     });
 })();

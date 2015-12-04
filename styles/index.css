@@ -25,8 +25,7 @@ img {
     width: 20px;
 }
 
-.office-label,
-.floor-label{
+.name-label{
     font-size: small;
     float: right;
     width: 45px;

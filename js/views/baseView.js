@@ -7,38 +7,32 @@ app.views = app.views || {};
         tagName: 'div',
 
         template: _.template(
-            '<input type="checkbox" class="floor"<%= isChecked %> data=<%= id %>>' +
+            '<div data="<%= dataStyle %>"><input type="checkbox" class="floor">' +
             '<label>' +
-            '<span><%= name %> Floor</span>' +
-            '<span class="pull-right"><img src="/test/images/room.png"></span>' +
-            '</label>'),
+            '<span><%= name %></span>' +
+            '<% if (additionalData) { %> <span class="pull-right"><%= additionalData %><img src="/test/images/room.png"></span>' +
+            '<% } %></label></div>'),
 
         events: {
             'click .floor': 'onCheckboxClicked'
         },
 
-        initialize: function () {
-            //this.listenTo(this.model, 'change', this.render);
-            this.model.setLabelName();
-        },
-
         render: function () {
             var data = {
-                id: this.model.get('id'),
-                name: this.model.get('labelName'),
-                isChecked: this.model.get('isSelected') ? 'checked' : ''
+                name: this.model.get('labelName') ? this.model.get('labelName') :  this.model.get('name'),
+                dataStyle: this.model.get('dataStyle'),
+                additionalData: this.model.get('roomNumber') || this.model.get('personsCapacity')
+               // isChecked: this.model.get('isSelected') ? 'checked' : ''
             };
 
             this.$el.html(this.template(data));
-            this.$('.floor').data(this.id);
+            this.$el.data(this.model.get('dataStyle'));
             return this;
         },
 
         onCheckboxClicked: function () {
             var isChecked = this.$('input.floor').is(':checked');
             this.model.set('isSelected', isChecked);
-
-            Backbone.Mediator.pub('floor:clicked', {id: this.model.id, isChecked: isChecked});
         }
     });
 })();

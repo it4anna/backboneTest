@@ -19,12 +19,20 @@ app.controllers = app.controllers || {};
                 this.collectionView.render();
             }.bind(this));
 
-            Backbone.Mediator.sub('floor:selected', this.updateCollection, this);
+            //data: {floorId: this.model.id, isChecked: isChecked}
+            Backbone.Mediator.sub('floor:clicked', this.updateCollection, this);
+
+            //data: {id: this.model.id, isChecked: isChecked}
+            Backbone.Mediator.pub('floor:allClicked', this.updateCollectionTotaly);
         },
 
-        updateCollection: function (floorId) {
-            this.collectionView.collection.setFilterColl('floorId', floorId, this.collection);
-            console.log('updateCollection with args: ', agruments);
+        updateCollection: function (data) {
+            this.collectionView.collection.setFilterColl('floorId', data.floorId, this.collection);
+            console.log('rooms collections updated: ', this.collectionView.collection.models);
+        },
+
+        updateCollectionTotaly: function () {
+            console.log('updateCollectionTotaly: Pls, realize me');
         }
     });
 })();

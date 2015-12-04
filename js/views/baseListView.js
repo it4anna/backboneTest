@@ -4,17 +4,15 @@ app.views = app.views || {};
     'use strict';
 
     app.views.baseListView = Backbone.View.extend({
-        name:'baseListView',
-
         template: _.template('<div>' +
             '<span id="header-label"></span>' +
-            '<input type="checkbox" class="pull-right checkbox all">' +
-            '<label class="name-label">Check all</label> ' +
+            '<input type="checkbox" class="pull-right checkbox filter">' +
+            '<label class="pull-right"> &darr; </label> ' +
             '<div id="content"></div>' +
             '</div>'),
 
         events: {
-            'click .all': 'onAllCheckboxClicked',
+            'click .filter': 'onFilterChanged',
             'change .one': 'onOneChanged'
         },
 
@@ -61,8 +59,8 @@ app.views = app.views || {};
             }
         },
 
-        onParentClicked: function (isSelected) {
-            isSelected ? this.$el.show() : this.$el.hide();
+/*        onParentClicked: function (isSelected) {
+            isSelected ? this.$el.show() : this.$el.hide();*/
 
 
 /*            var allIds = this.collection.pluck('floorId');
@@ -71,10 +69,10 @@ app.views = app.views || {};
             this.collection.setModelsIdToShow(selectedOfficeId);
             app.helper.localStorageSave('selectedFloorIdsList', []);
 
-            this.renderContent();*/
+            this.renderContent();
         },
 
-/*        onFloorClicked: function (data) {
+       onFloorClicked: function (data) {
             //update all checkbox
             this.$('input.all').prop('checked', this.isAllChecked());
             this.updateSelectedFloorId(data);
@@ -82,7 +80,7 @@ app.views = app.views || {};
             this.renderHeaderLabel();
         },*/
 
-        onAllCheckboxClicked : function () {
+        /*onAllCheckboxClicked : function () {
             var isChecked = this.$('input.all').is(':checked'),
                 allIds = _.pluck(this.collection.modelsToShow, 'id');
 
@@ -91,13 +89,17 @@ app.views = app.views || {};
             app.helper.localStorageSave('selectedFloorIdsList', isChecked ? allIds : []);
             this.collection.setSelected(allIds, isChecked);
             this.renderHeaderLabel();
-        },
 
-        isAllChecked: function () {
+            Backbone.Mediator.pub(this.name+':allClicked');
+            //todo [ids] instead of this.collection.models
+            Backbone.Mediator.pub(this.name+':allClicked', {ids: isChecked ? this.collection.models : []});
+        },*/
+
+        /*isAllChecked: function () {
             var floorCheckboxes = $('input[type=\'checkbox\'].floor');
 
             return floorCheckboxes.length === floorCheckboxes.filter(":checked").length;
-        },
+        },*/
 
         updateSelectedFloorId: function (changedFool) {
             //tmp

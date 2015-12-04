@@ -6,8 +6,8 @@ app.views = app.views || {};
     app.views.OfficeListView = Backbone.View.extend({
         template: _.template('<div>' +
             '<span id="header-label"></span>' +
-            '<input type="checkbox" class="pull-right checkbox">' +
-            '<label class="office-label">Sort by country</label> ' +
+            '<input type="checkbox" class="pull-right checkbox filter">' +
+            '<label class="pull-right"> &darr; </label> ' +
             '<div id="content"></div>' +
             '</div>'),
 
@@ -57,7 +57,7 @@ app.views = app.views || {};
             if (this.$('.checkbox').is(':checked')){
                 this.collection.sortByCountry();
             } else {
-                this.collection.sortByName();
+                this.collection.sort('name');
             }
             this.renderContent();
         }
