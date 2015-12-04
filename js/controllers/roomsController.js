@@ -3,7 +3,7 @@ app.controllers = app.controllers || {};
 (function () {
     'use strict';
 
-    app.controllers.RoomsController = app.controllers.base.extend({
+    app.controllers.RoomsController = Backbone.View.extend({
         initialize: function () {
             this.collection = new app.collections.RoomList();
             this.collectionView = new app.views.RoomListView({el: '#room-container'});
@@ -19,16 +19,16 @@ app.controllers = app.controllers || {};
                 this.collectionView.render();
             }.bind(this));
 
-            Backbone.Mediator.sub('floor:clicked', this.updateCollection, this);
-            Backbone.Mediator.sub('office:selected', this.clearCollection, this);
+            Backbone.Mediator.sub('floor:clicked', this.onFloorClicked, this);
+            Backbone.Mediator.sub('office:clicked', this.onOfficeClicked, this);
         },
 
-        updateCollection: function (data) {
+        onFloorClicked: function (data) {
             this.collectionView.collection.setFilterColl('floorId', data, this.collection);
         },
 
-        clearCollection: function () {
-            this.collectionView.collection.setFilterColl('floorId', [], this.collection);
+        onOfficeClicked: function () {
+            this.collectionView.collection.onOfficeClicked('floorId', [], this.collection);
         }
     });
 })();

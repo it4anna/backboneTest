@@ -10,8 +10,7 @@ app.collections = app.collections || {};
         comparator : 'name',
 
         setFilterColl: function (sortAttr, ids, collection) {
-            var sort = {},
-                models = [];
+            var models = [];
 
             _.each(ids, function(parentId){
                 _.each(collection.models,
@@ -27,11 +26,25 @@ app.collections = app.collections || {};
             this.trigger('change');
         },
 
-        setSelected: function (selectedIds, value) {
+/*        setSelected: function (selectedIds, value) {
             _.each(selectedIds, function(id){
                 // this.models.find(function(model){ if (model.id = id )return model}).set('isSelected', value);
                 this.get(id).set('isSelected', false);
             }, this);
+        },*/
+
+        getSelected: function () {
+            var selectedModels = [];
+
+            _.each(this.models, function(model){
+                if (model.get('isSelected') === true ){
+                    selectedModels.push(model.id);
+                }
+            }, this);
+
+            console.log('selectedModels', selectedModels);
+            return selectedModels;
+
         }
     });
 })();

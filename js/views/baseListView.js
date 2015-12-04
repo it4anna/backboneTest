@@ -41,10 +41,10 @@ app.views = app.views || {};
         },
 
         getModelNames : function () {
-            var selectedFloor = app.helper.localStorageGet('selectedFloorIdsList') || [],
+            var selectedFloors = app.helper.localStorageGet('selectedFloorIdsList') || [],
                 selectedFloorsNames = [];
 
-            switch (selectedFloor.length) {
+            switch (selectedFloors.length) {
                 case 0:
                     selectedFloorsNames  = 'None';
                     break;

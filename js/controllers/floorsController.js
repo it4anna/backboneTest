@@ -3,7 +3,7 @@ app.controllers = app.controllers || {};
 (function () {
     'use strict';
 
-    app.controllers.FloorsController = app.controllers.base.extend({
+    app.controllers.FloorsController = Backbone.View.extend({
         initialize: function () {
             this.collection = new app.collections.FloorList();
             this.collectionView = new app.views.FloorListView({el: '#floor-container'});
@@ -11,12 +11,7 @@ app.controllers = app.controllers || {};
 
             this.collection.fetch().done(function () {
                 //add storaged models
-                /*                _.each(data.floorIds, function (floorId){
-                 this.sortedCollView[floorId] =
-                 new app.views.RoomListView();
-                 this.sortedCollView[floorId].collection.setFilterColl('floorId', floorId, collection);
-                 $('#room-container .container').append(this.sortedCollView[floorId].render().$el);
-                 }, this);*/
+                this.storedSelectedIds = app.helper.localStorageGet('selectedFloorIdsList');
 
                 this.roomCollection.fetch().done(function(){
                     var models = [],
@@ -37,7 +32,8 @@ app.controllers = app.controllers || {};
                         floor.set('roomNumber', models.length);
                         i++;
                     }, this);
-                    this.collectionView.render();
+                    this.collectionView.collection.setFilterColl('officeId', this.storedSelectedIds, this.collection);
+                    Backbone.Mediator.sub('floor:selected',this.collectionView.collection.getSelected());
                 }.bind(this));
 
             }.bind(this));
