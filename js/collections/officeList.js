@@ -12,12 +12,6 @@ app.collections = app.collections || {};
 
         comparator : 'name',
 
-        sortByCountry: function() {
-            this.models = _.sortBy(this.models, function(model) {
-                return model.get('location').get('country');
-            });
-        },
-
         setSelected: function (selectedOfficeId) {
             this.get([selectedOfficeId]).set('isSelected', 'checked');
         },

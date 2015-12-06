@@ -10,8 +10,6 @@ app.models = app.models || {};
 
     app.models.Office = app.models.baseModel.extend({
         defaults: {
-            id: 'N/A',
-            name: '',
             isSelected: false
         },
 
