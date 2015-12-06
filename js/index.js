@@ -19,12 +19,7 @@ $(document).ready(function () {
     app.setToBackboneLocalStorage(app.collections.FloorList ,app.jsons.floorList);
     app.setToBackboneLocalStorage(app.collections.RoomList ,app.jsons.roomList);
 
-    //TODO: to delete
-    var floorIds = [];
-    _.each(app.jsons.floorList, function (floor) { floorIds.push(floor.floorId)}, this);
-
     roomsController = new app.controllers.RoomsController();
     floorsController = new app.controllers.FloorsController();
     officesController = new app.controllers.OfficesController();
-
 });

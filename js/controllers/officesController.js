@@ -13,8 +13,7 @@ app.controllers = app.controllers || {};
       this.selectedOfficeId = this.getSelectedFromLocalStorage();
 
       if(this.selectedOfficeId) {
-        Backbone.Mediator.pub('office:selected', this.onOfficeSelected);
-        console.log('OfficeSelected: ', this.selectedOfficeId);
+        Backbone.Mediator.pub('office:selected', this.selectedOfficeId[0]);
       }
 
       this.collectionView.collection.fetch().done(function (responce) {

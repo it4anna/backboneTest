@@ -12,12 +12,15 @@ app.models = app.models || {};
         defaults: {
             id: 'N/A',
             name: '',
-            _embedded: {
-                location: {
-                    country: 'N/A'
-                }
-            },
             isSelected: false
+        },
+
+        parse: function(response){
+           var nestedModel = response._embedded;
+            response.location = new app.models.Location(nestedModel.location);
+            response = _.omit(response , '_embedded');
+
+            return response;
         }
     });
 })();

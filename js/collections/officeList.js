@@ -14,7 +14,7 @@ app.collections = app.collections || {};
 
         sortByCountry: function() {
             this.models = _.sortBy(this.models, function(model) {
-                return model.get('_embedded').location.country;
+                return model.get('location').get('country');
             });
         },
 

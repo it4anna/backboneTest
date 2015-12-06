@@ -21,7 +21,7 @@ app.views = app.views || {};
             var data = {
                 id: this.model.get('id'),
                 name: this.model.get('name'),
-                country:  this.model.get('_embedded').location.country,
+                country:  this.model.get('location').get('country'),
                 isSelected: this.model.get('isSelected')
             };
 
