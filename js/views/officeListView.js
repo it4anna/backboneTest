@@ -15,23 +15,10 @@ app.views = app.views || {};
             'change .checkbox': 'onChecked'
         },
 
-        initialize: function() {
-            this.collection =  new app.collections.OfficeList();
-            this.currentOfficeId = app.helper.localStorageGet('selectedOfficeId');
-            Backbone.Mediator.sub('office:selected', this.renderHeaderLabel, this);
-
-            this.collection.fetch().done(function(responce) {
-                if(this.currentOfficeId.length) {
-                    this.collection.setSelected(this.currentOfficeId[0]);
-                }
-                this.render();
-                this.renderHeaderLabel(this.currentOfficeId[0]);
-            }.bind(this));
-        },
-
-        render: function () {
+        render: function (selectedOfficeId) {
             this.$el.html('');
             this.$el.append(this.template());
+            this.renderHeaderLabel(selectedOfficeId);
             this.renderContent();
         },
 
@@ -59,7 +46,6 @@ app.views = app.views || {};
             } else {
                 this.collection.sort('name');
             }
-            this.renderContent();
         }
     });
 })();

@@ -20,6 +20,10 @@ app.collections = app.collections || {};
 
         setSelected: function (selectedOfficeId) {
             this.get([selectedOfficeId]).set('isSelected', 'checked');
+        },
+
+        getSelected: function () {
+            return this.findWhere({isSelected: true});
         }
     });
 })();

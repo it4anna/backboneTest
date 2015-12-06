@@ -9,33 +9,22 @@ var app = window.app = {
 
 $(document).ready(function () {
     'use strict';
-    var officeListView,
-        floorListView,
-        floorController,
-        roomListView,
-        roomController;
+
+    var roomsController,
+      floorsController,
+      officesController;
 
    //Emulate api
     app.setToBackboneLocalStorage(app.collections.OfficeList, app.jsons.officeList);
     app.setToBackboneLocalStorage(app.collections.FloorList ,app.jsons.floorList);
     app.setToBackboneLocalStorage(app.collections.RoomList ,app.jsons.roomList);
 
-
-
-    //Create Collections
-   // app.collections.officeListInst = new app.collections.OfficeList();
-  //  app.collections.floorListInst = new app.collections.FloorList();
-  //  app.collections.roomListInst = new app.collections.RoomList();
-
-    //Create Views
-    officeListView = new app.views.OfficeListView({el: '#office-container'});
-    floorListView = new app.views.FloorListView({el: '#floor-container'});
-   // roomListView = new app.views.roomListView({el: '#room-container'});
-
+    //TODO: to delete
     var floorIds = [];
     _.each(app.jsons.floorList, function (floor) { floorIds.push(floor.floorId)}, this);
 
-    var floorsController = new app.controllers.FloorsController(),
-        roomsController = new app.controllers.RoomsController();
+    roomsController = new app.controllers.RoomsController();
+    floorsController = new app.controllers.FloorsController();
+    officesController = new app.controllers.OfficesController();
 
 });
