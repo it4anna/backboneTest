@@ -11,7 +11,7 @@ app.views = app.views || {};
             this.View = app.views.RoomView;
             this.headerName = 'Room';
 
-            this.listenTo(this.collection, 'change', this.render.bind(this));
+            this.listenTo(this.collection, 'change', this.render);
         },
 
         onFilterChanged : function () {

@@ -4,14 +4,14 @@ app.views = app.views || {};
     'use strict';
 
     app.views.FloorListView = app.views.baseListView.extend({
-        name: 'floor',
+        name: 'floors',
 
         initialize: function () {
             this.collection =  new app.collections.FloorList ();
             this.View = app.views.FloorView;
             this.headerName = 'Floor';
 
-            this.listenTo(this.collection, 'change', this.render.bind(this));
+            this.listenTo(this.model, 'change', this.renderContent, this);
         },
 
         onFilterChanged : function () {
@@ -20,7 +20,6 @@ app.views = app.views || {};
             } else {
                 this.collection.sort('labelName');
             }
-            this.renderContent();
         }
     });
 })();

@@ -41,7 +41,8 @@ app.views = app.views || {};
         },
 
         getModelNames : function () {
-            var selectedFloors = app.helper.localStorageGet('selectedFloorIdsList') || [],
+            // TODO: make it really base
+           /* var selectedFloors = app.helper.localStorageGet('selectedFloorIdsList') || [],
                 selectedFloorsNames = [];
 
             switch (selectedFloors.length) {
@@ -53,13 +54,13 @@ app.views = app.views || {};
                     break;
                 default:
                     selectedFloorsNames  =  'Selected IDs';
-                    /*  _.each(selectedFloor, function (id) {
+                    /!*  _.each(selectedFloor, function (id) {
                      // selectedFloorsNames.push(
                      //   this.collection.where({model.id = id}return model.get('labelName');});
-                     });*/
+                     });*!/
                     break;
             }
-            return selectedFloorsNames;
+            return selectedFloorsNames;*/
         }
     });
 })();

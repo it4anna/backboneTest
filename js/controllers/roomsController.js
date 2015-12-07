@@ -16,16 +16,13 @@ app.controllers = app.controllers || {};
                 this.collectionView.collection.setFilterColl('officeId', this.storedRoomIds, this.collection);
             }.bind(this));
 
-            Backbone.Mediator.sub('floor:clicked', this.onFloorClicked, this);
-            Backbone.Mediator.sub('office:clicked', this.onOfficeClicked, this);
+            Backbone.Mediator.sub('floors:selected', this.onFloorClicked, this);
+
         },
 
         onFloorClicked: function (data) {
             this.collectionView.collection.setFilterColl('floorId', data, this.collection);
-        },
-
-        onOfficeClicked: function () {
-            this.collectionView.collection.onOfficeClicked('floorId', [], this.collection);
+            this.collectionView.renderContent();
         }
     });
 })();

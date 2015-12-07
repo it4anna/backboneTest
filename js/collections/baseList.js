@@ -35,6 +35,17 @@ app.collections = app.collections || {};
 
             return selectedModels;
 
+        },
+
+        setSelected: function (selectedIds) {
+            //check the method
+            _.each(selectedIds, function (selectedId) {
+                this.each(function(model){
+                    if (model.get('id') === selectedId){
+                        model.set('isSelected', true)
+                    }
+                });
+            }, this);
         }
     });
 })();
