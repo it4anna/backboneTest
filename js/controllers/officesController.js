@@ -12,9 +12,11 @@ app.controllers = app.controllers || {};
       });
       this.selectedOfficeId = this.getSelectedFromLocalStorage();
 
-      if(this.selectedOfficeId) {
-        Backbone.Mediator.pub('office:selected', this.selectedOfficeId[0]);
+      //we need pub once, before sub, to not clear localStorage after load
+      if(!_.isEmpty(this.selectedOfficeId)) {
+        Backbone.Mediator.pub('office:selected', this.selectedOfficeId);
       }
+      Backbone.Mediator.sub('selected', this.onOfficeSelected, this);
 
       this.collectionView.collection.fetch().done(function (responce) {
         if (this.selectedOfficeId.length) {
@@ -23,7 +25,6 @@ app.controllers = app.controllers || {};
         this.collectionView.render(this.selectedOfficeId[0]);
       }.bind(this));
 
-      Backbone.Mediator.sub('office:selected', this.onOfficeSelected, this);
     },
 
     getSelectedFromLocalStorage: function () {
@@ -35,10 +36,11 @@ app.controllers = app.controllers || {};
     },
 
     onOfficeSelected: function (officeId) {
-      console.log('OfficeSelected: ', officeId);
       app.helper.localStorageSet("selectedOfficeId", officeId);
       app.helper.localStorageSet('selectedFloorIdsList', []);
       app.helper.localStorageSet('selectedRoomIdsList', []);
+
+      Backbone.Mediator.pub('office:selected', [officeId]);
     }
   })
 })();

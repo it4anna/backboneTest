@@ -32,7 +32,7 @@ app.views = app.views || {};
         onSelected: function () {
             this.model.set('isSelected', 'checked');
 
-            Backbone.Mediator.pub('office:selected', this.model.id);
+            Backbone.Mediator.pub('selected', this.model.id);
         }
     });
 })();

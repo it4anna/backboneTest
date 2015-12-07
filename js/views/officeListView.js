@@ -41,7 +41,6 @@ app.views = app.views || {};
         },
 
         onChecked: function () {
-            console.log(this);
             if (this.$('.checkbox').is(':checked')){
                 this.collection.comparator = function(model){
                     return model.get('location').get('country');
